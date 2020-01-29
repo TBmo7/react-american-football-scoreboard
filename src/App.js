@@ -9,7 +9,7 @@ function App() {
   const [lionScore, setLionScore] = useState(0);
   const [tigerScore, setTigerScore] = useState(0);
   const [timer, setTimer] = useState("15:00");
-  //const reset = (a,b) => {return tigerScore*lionScore*0;}
+  const reset = () => {setLionScore(0);setTigerScore(0);}
 
   return (
     <div className="container">
@@ -41,7 +41,7 @@ function App() {
           <button onClick ={()=> setTigerScore(tigerScore+3)} className="awayButtons__fieldGoal">Away Field Goal</button>
         </div>
         <div className = "gameButtons">
-          <button onClick ={()=> setTigerScore(tigerScore*0)} className = "reset">Reset</button>
+          <button onClick ={()=> reset()} className = "reset">Reset</button>
 
         </div>
       </section>
