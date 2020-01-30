@@ -30,3 +30,4 @@ const BottomRow = () => {
 };
 
 export default BottomRow;
+export function setDown(){};

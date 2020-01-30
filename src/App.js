@@ -2,15 +2,16 @@
 import React, {useState} from "react";
 import "./App.css";
 import BottomRow from "./BottomRow";
+import {setDown} from "./BottomRow";
 
 
 function App() {
   //TODO: STEP 2 - Establish your applictaion's state with some useState hooks.  You'll need one for the home score and another for the away score.
-  let currentTime= 900;
+
   const [lionScore, setLionScore] = useState(0);
   const [tigerScore, setTigerScore] = useState(0);
-  const [timer, setTimer] = useState(currentTime);
-  const reset = () => {setLionScore(0);setTigerScore(0);}
+  const [timer, setTimer] = useState(900);
+  const reset = () => {setLionScore(0);setTigerScore(0);setTimer(900)}
 
   //LOGIC
   let probability = 0;
@@ -18,7 +19,7 @@ function App() {
   let changeYard = 0;
   let changeTime = 0;
   let currentYard = 50;
-
+  //let currentTime;
 
 
 
@@ -70,7 +71,11 @@ function App() {
     }
       currentYard += changeYard;
       changeYard += changeYard;
+
+      setTimer(timer-changeTime);
+      changeTime = 0;
       down ++;
+      setDown(down);
 
     console.log(probability);
     console.log(changeYard);
@@ -87,6 +92,7 @@ function App() {
           }
           if(down>=4){
             down =0;
+
           }
 
 
@@ -142,6 +148,9 @@ function App() {
     }
       currentYard += changeYard;
       changeYard += changeYard;
+
+      setTimer(timer-changeTime);
+      changeTime = 0;
       down ++;
 
     console.log(probability);
