@@ -6,10 +6,164 @@ import BottomRow from "./BottomRow";
 
 function App() {
   //TODO: STEP 2 - Establish your applictaion's state with some useState hooks.  You'll need one for the home score and another for the away score.
+  let currentTime= 900;
   const [lionScore, setLionScore] = useState(0);
   const [tigerScore, setTigerScore] = useState(0);
-  const [timer, setTimer] = useState("15:00");
+  const [timer, setTimer] = useState(currentTime);
   const reset = () => {setLionScore(0);setTigerScore(0);}
+
+  //LOGIC
+  let probability = 0;
+  let down = 1;
+  let changeYard = 0;
+  let changeTime = 0;
+  let currentYard = 50;
+
+
+
+
+  const pass = () => {
+    if(down === 1){
+      probability = 48;
+      if(probability > Math.floor((Math.random()*100)+1)){
+        //success
+         changeYard = Math.floor((Math.random()*100)+1);
+         changeTime = Math.floor((Math.random()*60)+1);
+      }
+      else{
+         changeYard = 0;
+         changeTime = Math.floor((Math.random()*30)+1);
+      }
+    }
+    if(down === 2){
+      probability = 28;
+      if(probability > Math.floor((Math.random()*100)+1)){
+         changeYard = Math.floor((Math.random()*100)+1);
+         changeTime = Math.floor((Math.random()*60)+1);
+      }
+      else{
+         changeYard = 0;
+         changeTime = Math.floor((Math.random()*30)+1);
+      }
+    }
+    if(down === 3 ){
+      probability = 25;
+      if(probability > Math.floor((Math.random()*100)+1)){
+         changeYard = Math.floor((Math.random()*100)+1);
+         changeTime = Math.floor((Math.random()*60)+1);
+      }
+      else{
+         changeYard = 0;
+         changeTime = Math.floor((Math.random()*30)+1);
+      }
+    }
+    if(down === 4){
+      probability = 15;
+      if(probability > Math.floor((Math.random()*100)+1)){
+         changeYard = Math.floor((Math.random()*100)+1);
+         changeTime = Math.floor((Math.random()*60)+1);
+      }
+      else{
+         changeYard = 0;
+         changeTime = Math.floor((Math.random()*30)+1);
+      }
+    }
+      currentYard += changeYard;
+      changeYard += changeYard;
+      down ++;
+
+    console.log(probability);
+    console.log(changeYard);
+    console.log(down);
+    console.log(changeTime);
+          if(changeYard > 10){
+            down=1;
+            currentYard += changeYard;
+          }
+          if(currentYard >= 100){
+            setTigerScore(tigerScore+7);
+            currentYard = 50;
+            down = 1;
+          }
+          if(down>=4){
+            down =0;
+          }
+
+
+  }
+
+
+
+  const run = () => {
+    if(down === 1){
+      probability = 48;
+      if(probability > Math.floor((Math.random()*100)+1)){
+        //success
+         changeYard = Math.floor((Math.random()*100)+1);
+         changeTime = Math.floor((Math.random()*60)+1);
+      }
+      else{
+         changeYard = 0;
+         changeTime = Math.floor((Math.random()*30)+1);
+      }
+    }
+    if(down === 2){
+      probability = 28;
+      if(probability > Math.floor((Math.random()*100)+1)){
+         changeYard = Math.floor((Math.random()*100)+1);
+         changeTime = Math.floor((Math.random()*60)+1);
+      }
+      else{
+         changeYard = 0;
+         changeTime = Math.floor((Math.random()*30)+1);
+      }
+    }
+    if(down === 3 ){
+      probability = 25;
+      if(probability > Math.floor((Math.random()*100)+1)){
+         changeYard = Math.floor((Math.random()*100)+1);
+         changeTime = Math.floor((Math.random()*60)+1);
+      }
+      else{
+         changeYard = 0;
+         changeTime = Math.floor((Math.random()*30)+1);
+      }
+    }
+    if(down === 4){
+      probability = 15;
+      if(probability > Math.floor((Math.random()*100)+1)){
+         changeYard = Math.floor((Math.random()*100)+1);
+         changeTime = Math.floor((Math.random()*60)+1);
+      }
+      else{
+         changeYard = 0;
+         changeTime = Math.floor((Math.random()*30)+1);
+      }
+    }
+      currentYard += changeYard;
+      changeYard += changeYard;
+      down ++;
+
+    console.log(probability);
+    console.log(changeYard);
+    console.log(down);
+    console.log(changeTime);
+          if(changeYard > 10){
+            down=1;
+            currentYard += changeYard;
+          }
+          if(currentYard >= 100){
+            setLionScore(lionScore+7);
+            currentYard = 50;
+            down = 1;
+          }
+          if(down>=4){
+            down =0;
+          }
+
+
+  }
+
 
   return (
     <div className="container">
@@ -41,7 +195,9 @@ function App() {
           <button onClick ={()=> setTigerScore(tigerScore+3)} className="awayButtons__fieldGoal">Away Field Goal</button>
         </div>
         <div className = "gameButtons">
-          <button onClick ={()=> reset()} className = "reset">Reset</button>
+          <button onClick ={()=> reset()} className = "gameButtons__reset">Reset</button>
+          <button onClick = {()=> pass()} className = "gameButtons__pass">Tigers</button>
+          <button onClick = {()=> run()} className = "gameButtons__run">Lions</button>
 
         </div>
       </section>
